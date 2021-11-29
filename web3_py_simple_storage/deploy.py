@@ -66,7 +66,7 @@ transaction = SimpleStorage.constructor().buildTransaction(
         "chainId": chain_id,
         "gasPrice": w3.eth.gas_price,
         "from": my_address,
-        "nonce": nonce,
+        "nonce": nonce, 
     }
 )
 # Sign the transaction
