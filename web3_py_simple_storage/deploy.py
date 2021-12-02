@@ -51,9 +51,9 @@ abi = json.loads(
 # chain_id = 4
 #
 # For connecting to ganache
-w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:7545"))
-chain_id = 5777
-my_address = "0x75872739C534a15D42f876E28aBD7E130073Cc1E"
+w3 = Web3(Web3.HTTPProvider("https://ropsten.infura.io/v3/bbb9a4be84f7416aa73c90484b4be6ba"))
+chain_id = 3
+my_address = "0xdBF8cDFf242DA4D5487D4474d1d347a56537d555"
 private_key = os.getenv("PRIVATE_KEY")
 
 # Create the contract in Python
@@ -66,7 +66,7 @@ transaction = SimpleStorage.constructor().buildTransaction(
         "chainId": chain_id,
         "gasPrice": w3.eth.gas_price,
         "from": my_address,
-        "nonce": nonce, 
+        "nonce": nonce,
     }
 )
 # Sign the transaction
