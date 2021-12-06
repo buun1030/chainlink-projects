@@ -72,8 +72,11 @@ INITIAL_VALUE = 200000000000
 
 def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
     account = get_account()
+    # input contructor of MockV3Aggregator contract before {"from": account}
     MockV3Aggregator.deploy(decimals, initial_value, {"from": account})
+    # input contructor of LinkToken contract before {"from": account}, LinkToken have no constructor
     link_token = LinkToken.deploy({"from": account})
+    # input contructor of VRFCoordinatorMock contract before {"from": account}
     VRFCoordinatorMock.deploy(link_token.address, {"from": account})
     print("Deployed!")
 
@@ -86,6 +89,10 @@ def fund_with_link(
     tx = link_token.transfer(contract_address, amount, {"from": account})
     # link_token_contract = interface.LinkTokenInterface(link_token.address)
     # tx = link_token_contract.transfer(contract_address, amount, {"from": account})
+    """
+    Or we can use just an interface because interface will compile down to our abi
+    Also we can use LinkToken interface the same way as we use the LinkToken contract
+    """
     tx.wait(1)
     print("Fund contract!")
     return tx
