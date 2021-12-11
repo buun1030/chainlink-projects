@@ -19,6 +19,11 @@ def test_can_pick_winner():
     lottery.enter({"from": account, "value": lottery.getEntranceFee()})
     fund_with_link(lottery)
     lottery.endLottery({"from": account})
-    time.sleep(60)
+    """
+    When we call endLottery function, we're gonna request the chainlink node
+    Then chainlink node is going to respond by calling fulfillRandomness function
+    So we have to wait for that chainlink node to finish, normally within a few block
+    """
+    time.sleep(300)
     assert lottery.recentWinner() == account
     assert lottery.balance() == 0

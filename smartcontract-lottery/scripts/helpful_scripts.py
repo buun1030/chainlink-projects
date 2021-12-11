@@ -72,11 +72,8 @@ INITIAL_VALUE = 200000000000
 
 def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
     account = get_account()
-    # input contructor of MockV3Aggregator contract before {"from": account}
     MockV3Aggregator.deploy(decimals, initial_value, {"from": account})
-    # input contructor of LinkToken contract before {"from": account}, LinkToken have no constructor
     link_token = LinkToken.deploy({"from": account})
-    # input contructor of VRFCoordinatorMock contract before {"from": account}
     VRFCoordinatorMock.deploy(link_token.address, {"from": account})
     print("Deployed!")
 

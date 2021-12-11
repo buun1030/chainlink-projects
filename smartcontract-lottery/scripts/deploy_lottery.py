@@ -9,7 +9,6 @@ def deploy_lottery():
         get_contract("eth_usd_price_feed").address,
         get_contract("vrf_coordinator").address,
         get_contract("link_token").address,
-        # fee and keyhash are not a contract
         config["networks"][network.show_active()]["fee"],
         config["networks"][network.show_active()]["keyhash"],
         {"from": account},
@@ -44,8 +43,13 @@ def end_lottery():
     tx = fund_with_link(lottery.address)
     tx.wait(1)
     ending_transaction = lottery.endLottery({"from": account})
-    ending_transaction.wait(1)
-    time.sleep(60)
+    ending_transaction.wait(6)
+    """
+    When we call endLottery function, we're gonna request the chainlink node
+    Then chainlink node is going to respond by calling fulfillRandomness function
+    So we have to wait for that chainlink node to finish, normally within a few block
+    """
+    time.sleep(300)
     print(f"{lottery.recentWinner()} is the new winner!")
 
 
