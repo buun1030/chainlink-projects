@@ -18,6 +18,6 @@ def test_can_create_advanced_collectible_integration():
         pytest.skip("Only for integration testing")
     # Act
     advanced_collectible, creation_transaction = deploy_and_create()
-    time.sleep(60)
+    time.sleep(600)
     # Assert
     assert advanced_collectible.tokenCounter() == 1
