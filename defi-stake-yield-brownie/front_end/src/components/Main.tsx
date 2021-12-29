@@ -34,9 +34,13 @@ export const Main = () => {
     // send the build folder
     const classes = useStyles()
     const { chainId, error } = useEthers()
+    // What network we're on
     const networkName = chainId ? helperConfig[chainId] : "dev"
     let stringChainId = String(chainId)
+    // Got different address for different token
     const dappTokenAddress = chainId ? networkMapping[stringChainId]["DappToken"][0] : constants.AddressZero
+    // The more times we deploy, the more times brownie is going to keep track of it in map.json
+    // But we want the most recent one, so ["DappToken"][0]
     const wethTokenAddress = chainId ? brownieConfig["networks"][networkName]["weth_token"] : constants.AddressZero // brownie config
     const fauTokenAddress = chainId ? brownieConfig["networks"][networkName]["fau_token"] : constants.AddressZero
 
