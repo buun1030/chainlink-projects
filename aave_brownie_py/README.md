@@ -12,3 +12,6 @@ are already deployed on chain.
 Testing:
 Integration test: Kovan
 Unit tests: Mainnet-fork (Mock all of mainnet!)
+
+Interface meaning (At least in golang meaning)
+Hey baby, if you've got these methods, you're my type.
